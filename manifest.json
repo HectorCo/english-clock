@@ -1,0 +1,26 @@
+{
+  "name": "English Clock — Aprende la hora en inglés",
+  "short_name": "English Clock",
+  "description": "Aplicación educativa interactiva para aprender a decir la hora en inglés con el método de las dos mitades.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F8FAFC",
+  "theme_color": "#22C55E",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23F8FAFC'/%3E%3Ccircle cx='96' cy='96' r='74' fill='%23FFFFFF' stroke='%231E293B' stroke-width='8'/%3E%3Cpath d='M96 22 A74 74 0 0 1 96 170 Z' fill='%23DCFCE7'/%3E%3Cpath d='M96 22 A74 74 0 0 0 96 170 Z' fill='%23FFEDD5'/%3E%3Ccircle cx='96' cy='96' r='74' fill='none' stroke='%231E293B' stroke-width='8'/%3E%3Cline x1='96' y1='96' x2='96' y2='44' stroke='%2322C55E' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='96' y1='96' x2='134' y2='118' stroke='%23F97316' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='96' cy='96' r='8' fill='%231E293B'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='108' fill='%23F8FAFC'/%3E%3Ccircle cx='256' cy='256' r='196' fill='%23FFFFFF' stroke='%231E293B' stroke-width='20'/%3E%3Cpath d='M256 60 A196 196 0 0 1 256 452 Z' fill='%23DCFCE7'/%3E%3Cpath d='M256 60 A196 196 0 0 0 256 452 Z' fill='%23FFEDD5'/%3E%3Ccircle cx='256' cy='256' r='196' fill='none' stroke='%231E293B' stroke-width='20'/%3E%3Cline x1='256' y1='256' x2='256' y2='116' stroke='%2322C55E' stroke-width='20' stroke-linecap='round'/%3E%3Cline x1='256' y1='256' x2='360' y2='316' stroke='%23F97316' stroke-width='20' stroke-linecap='round'/%3E%3Ccircle cx='256' cy='256' r='20' fill='%231E293B'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

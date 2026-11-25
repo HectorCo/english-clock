@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#22C55E" />
+  <meta name="description" content="Aprende a decir la hora en inglés jugando con el método de las dos mitades." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>English Clock — Aprende la hora en inglés</title>
+
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23FFF' stroke='%231E293B' stroke-width='4'/%3E%3Cpath d='M32 4 A28 28 0 0 1 32 60 Z' fill='%23DCFCE7'/%3E%3Cpath d='M32 4 A28 28 0 0 0 32 60 Z' fill='%23FFEDD5'/%3E%3Ccircle cx='32' cy='32' r='28' fill='none' stroke='%231E293B' stroke-width='4'/%3E%3Cline x1='32' y1='32' x2='32' y2='14' stroke='%2322C55E' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='32' y1='32' x2='46' y2='40' stroke='%23F97316' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='3.5' fill='%231E293B'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Barra superior -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🕒</span>
+        <div class="brand-text">
+          <h1>English Clock</h1>
+          <p class="brand-sub">El método de las dos mitades</p>
+        </div>
+      </div>
+
+      <nav class="mode-tabs" aria-label="Modos de la aplicación">
+        <button id="tab-explore" class="tab-btn active" type="button" data-mode="explore">
+          🔍 Explora el Reloj
+        </button>
+        <button id="tab-practice" class="tab-btn" type="button" data-mode="practice">
+          🏆 Practica y Supera Niveles
+        </button>
+      </nav>
+
+      <div class="stats-bar" aria-label="Progreso">
+        <div class="stat-pill stat-stars" title="Estrellas totales">
+          <span aria-hidden="true">⭐</span>
+          <span id="total-stars">0</span>
+        </div>
+        <div class="stat-pill stat-streak" title="Racha actual">
+          <span aria-hidden="true">🔥</span>
+          <span id="current-streak">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MODO A: EXPLORA EL RELOJ -->
+    <main id="view-explore" class="view active">
+      <div class="explore-layout">
+        <!-- Columna izquierda: Reloj interactivo + controles -->
+        <section class="clock-card">
+          <div class="clock-toolbar">
+            <label class="toggle-switch" for="hints-toggle">
+              <input type="checkbox" id="hints-toggle" checked />
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">Modo Pistas</span>
+            </label>
+
+            <div class="zone-legend">
+              <span class="legend-badge legend-oclock">o'clock (:00)</span>
+              <span class="legend-badge legend-past">PAST (han pasado)</span>
+              <span class="legend-badge legend-to">TO (faltan para)</span>
+            </div>
+          </div>
+
+          <div class="clock-wrapper">
+            <svg id="explore-clock" class="analog-clock" viewBox="0 0 420 420" role="img" aria-label="Reloj analógico interactivo">
+              <!-- El contenido SVG se genera dinámicamente en app.js -->
+            </svg>
+          </div>
+
+          <p class="drag-tip">👆 Arrastra la aguja larga (minutos) con el dedo o usa los botones:</p>
+
+          <div class="clock-controls">
+            <button id="btn-minus-5" class="ctrl-btn" type="button">-5 min</button>
+            <button id="btn-plus-5" class="ctrl-btn" type="button">+5 min</button>
+            <button id="btn-plus-1h" class="ctrl-btn" type="button">+1 hora</button>
+            <button id="btn-random-time" class="ctrl-btn ctrl-btn-accent" type="button">🎲 Hora aleatoria</button>
+          </div>
+        </section>
+
+        <!-- Columna derecha: Panel en tiempo real -->
+        <section class="info-panel">
+          <div class="digital-card">
+            <span class="card-kicker">Reloj digital</span>
+            <div id="explore-digital" class="digital-time">06:40</div>
+          </div>
+
+          <div class="phrase-card">
+            <span class="card-kicker">En inglés se dice:</span>
+            <div id="explore-phrase" class="english-phrase">It's twenty to seven</div>
+            <button id="btn-speak-explore" class="speak-btn" type="button">
+              🔊 Escuchar en inglés
+            </button>
+          </div>
+
+          <div class="trick-card">
+            <div class="trick-header">
+              <span aria-hidden="true">💡</span>
+              <h2>Truco mental</h2>
+            </div>
+            <p id="explore-trick" class="trick-text">
+              Faltan 20 para las 7 → twenty to + (6+1) seven
+            </p>
+          </div>
+
+          <div class="posts-card">
+            <h3>Los 4 postes principales</h3>
+            <div class="posts-grid">
+              <button class="post-chip post-oclock" type="button" data-minute="0">:00 o'clock</button>
+              <button class="post-chip post-past" type="button" data-minute="15">:15 quarter past</button>
+              <button class="post-chip post-past" type="button" data-minute="30">:30 half past</button>
+              <button class="post-chip post-to" type="button" data-minute="45">:45 quarter to</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- MODO B: PRACTICA Y SUPERA NIVELES -->
+    <main id="view-practice" class="view">
+      <!-- Pantalla de selección de niveles -->
+      <section id="levels-screen" class="levels-screen">
+        <div class="section-header">
+          <h2>Elige un nivel para practicar</h2>
+          <p>Completa rondas de 10 preguntas para ganar estrellas ⭐</p>
+        </div>
+
+        <div class="levels-grid">
+          <article class="level-card level-1" data-level="1">
+            <div class="level-badge">Nivel 1 · Verde</div>
+            <h3>La cruz del reloj</h3>
+            <p>Solo las horas principales: <strong>:00</strong>, <strong>:15</strong>, <strong>:30</strong> y <strong>:45</strong>.</p>
+            <div class="level-footer">
+              <span class="level-stars" id="stars-level-1">☆☆☆</span>
+              <button class="start-level-btn" type="button" data-level="1">Jugar →</button>
+            </div>
+          </article>
+
+          <article class="level-card level-2" data-level="2">
+            <div class="level-badge">Nivel 2 · Amarillo</div>
+            <h3>Lado derecho (PAST)</h3>
+            <p>De 5 en 5 desde <strong>:05</strong> hasta <strong>:25</strong>. ¡La hora no cambia!</p>
+            <div class="level-footer">
+              <span class="level-stars" id="stars-level-2">☆☆☆</span>
+              <button class="start-level-btn" type="button" data-level="2">Jugar →</button>
+            </div>
+          </article>
+
+          <article class="level-card level-3" data-level="3">
+            <div class="level-badge">Nivel 3 · Naranja</div>
+            <h3>Lado izquierdo (TO)</h3>
+            <p>De 5 en 5 desde <strong>:35</strong> hasta <strong>:55</strong>. ¡Recuerda sumar +1 a la hora!</p>
+            <div class="level-footer">
+              <span class="level-stars" id="stars-level-3">☆☆☆</span>
+              <button class="start-level-btn" type="button" data-level="3">Jugar →</button>
+            </div>
+          </article>
+
+          <article class="level-card level-4" data-level="4">
+            <div class="level-badge">Nivel 4 · Rojo</div>
+            <h3>Reto Final + Detective</h3>
+            <p>Todo mezclado y <strong>Detective Inverso</strong>: escucha la frase y elige el reloj digital.</p>
+            <div class="level-footer">
+              <span class="level-stars" id="stars-level-4">☆☆☆</span>
+              <button class="start-level-btn" type="button" data-level="4">Jugar →</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pantalla de ejercicio activo -->
+      <section id="quiz-screen" class="quiz-screen hidden">
+        <div class="quiz-topbar">
+          <button id="btn-back-levels" class="back-btn" type="button">← Niveles</button>
+          <div class="quiz-progress-wrap">
+            <span id="quiz-level-title" class="quiz-level-title">Nivel 1</span>
+            <div class="progress-bar">
+              <div id="quiz-progress-fill" class="progress-fill" style="width: 10%"></div>
+            </div>
+            <span id="quiz-counter" class="quiz-counter">1 / 10</span>
+          </div>
+          <div class="quiz-score-pill">
+            Aciertos: <strong id="quiz-hits">0</strong>
+          </div>
+        </div>
+
+        <div class="quiz-layout">
+          <!-- Estímulo (Reloj o Frase Detective Inverso) -->
+          <div class="quiz-stimulus-card">
+            <p id="quiz-prompt-label" class="quiz-prompt-label">¿Qué hora marca este reloj?</p>
+
+            <!-- Formato 1: Reloj analógico + digital -->
+            <div id="stimulus-clock-wrap" class="stimulus-clock-wrap">
+              <svg id="quiz-clock" class="analog-clock quiz-analog-clock" viewBox="0 0 420 420" role="img" aria-label="Reloj del ejercicio"></svg>
+              <div id="quiz-digital-badge" class="quiz-digital-badge">06:40</div>
+            </div>
+
+            <!-- Formato 2: Detective Inverso -->
+            <div id="stimulus-detective-wrap" class="stimulus-detective-wrap hidden">
+              <div class="detective-badge">🕵️‍♀️ Detective Inverso</div>
+              <div id="detective-phrase" class="detective-phrase">It's twenty to nine</div>
+              <button id="btn-speak-detective" class="speak-btn speak-btn-lg" type="button">
+                🔊 Escuchar pista
+              </button>
+            </div>
+          </div>
+
+          <!-- Opciones y retroalimentación -->
+          <div class="quiz-answers-card">
+            <div id="options-container" class="options-container">
+              <!-- 3 botones grandes generados dinámicamente -->
+            </div>
+
+            <div id="feedback-box" class="feedback-box hidden" aria-live="polite">
+              <div id="feedback-title" class="feedback-title"></div>
+              <p id="feedback-detail" class="feedback-detail"></p>
+              <button id="btn-next-question" class="next-btn" type="button">
+                Siguiente pregunta →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pantalla de resumen de ronda -->
+      <section id="summary-screen" class="summary-screen hidden">
+        <div class="summary-card">
+          <div id="summary-stars" class="summary-stars">⭐⭐⭐</div>
+          <h2 id="summary-title">¡Ronda completada!</h2>
+          <p id="summary-text" class="summary-text">Has acertado 9 de 10 preguntas.</p>
+          <div class="summary-actions">
+            <button id="btn-replay-level" class="ctrl-btn ctrl-btn-accent" type="button">🔄 Jugar otra vez</button>
+            <button id="btn-summary-levels" class="ctrl-btn" type="button">📋 Elegir otro nivel</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
